@@ -1,0 +1,3 @@
+Performs power iteration clustering(similar to spectral clustering). 
+Datasets in a5_data folder. 
+Will need AWS/Azure cluster for large datasets. Will work locally for small ones.
