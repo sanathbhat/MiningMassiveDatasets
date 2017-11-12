@@ -1,0 +1,5 @@
+project/
+data/
+target/
+!target/scala-2.10/kmeans-clustering_2.10-1.0.jar
+
