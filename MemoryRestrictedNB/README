@@ -1,0 +1,5 @@
+To run the program via a terminal, use:
+
+cat train.txt | java -Xmx128m NBTrain | sort -k1,1 | java -Xmx128m MergeCounts | java -Xmx128m NBTest test.txt
+
+Small Dataset available here. Works for datasets upto 7GB size(tested)
