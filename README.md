@@ -1,2 +1,2 @@
 # MiningMassiveDatasets
-Repository of projects done in MMD class
+Repository of big data projects
