@@ -1,6 +1,6 @@
 This is a distributed approach to the matrix factorization problem using stochastic gradient descent implemented for the Apache Spark platform in the Scala language.
 
-The program follows the main ideas of Gemulla et al, 2011, wherein the input matrix is stratified and distributed so that each block can update different parts of the factor matrices thereby having workers make independent updates on the factors.
+The program follows the main ideas of Gemulla et al, 2011, wherein the input matrix is stratified and distributed so that each block can update different parts of the factor matrices thereby having workers make independent updates on different parts of each of the two factors thus NOT requiring locking of portions of the factors for concurrency.
 A subsample of the Netflix dataset is used and included here (nf_subsample.csv).
 
 To run the program on a local standalone cluster:
