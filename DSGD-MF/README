@@ -1,0 +1,22 @@
+This is a distributed approach to the matrix factorization problem using stochastic gradient descent implemented for the Apache Spark platform in the Scala language.
+
+The program follows the main ideas of Gemulla et al, 2011, wherein the input matrix is stratified and distributed so that each block can update different parts of the factor matrices thereby having workers make independent updates on the factors.
+A subsample of the Netflix dataset is used and included here (nf_subsample.csv).
+
+To run the program on a local standalone cluster:
+
+$ spark-submit --class DSGDMF --master local[<#cores>] target/scala-2.11/dsgd-mf_2.11-1.0.jar <I> <B> <F> <beta> <lambda>
+
+where (all recommendations for parameter values are purely for this subsampled Netflix dataset that is included)
+I = #iterations (Needs about 300-500 iterations at most generally for convergence)
+B = #parallel blocks per iteration (A small # of blocks (1-5) will cause immediate divergence as the gradient rapidly goes beyond numeric limits. Overcoming this will require tuning of the step size's tau parameter which is set to 1e6 in the program)
+F = #required rank of factors (Too few factors or too many factors, both are bad. For eg F=20 is a value that gives good converged loss, while F=5 or F=100 fails to reach the loss attained when F=20)
+beta = stepsize decay constant. (The higher the value of beta, the lower the starting step size and the faster the decay of the step size. Ideal values of step size are in the range (0.6 - 1.0)
+lambda = regularization constant for L2 loss (0.1 is a good value)
+
+For eg:
+
+$ spark-submit --class DSGDMF --master local[*] target/scala-2.11/dsgd-mf_2.11-1.0.jar 30 10 20 0.6 0.1
+
+
+As much as I would like to think this is a good and efficient implementation (several magnitudes faster than the Hadoop implementation in the paper), feedback about optimization, bugs is always appreciated
